@@ -10,12 +10,12 @@ export default function MortgageCalculator() {
     
     return (
         <article className="w-5xl bg-white rounded-3xl shadow-2xs">
-            <div className="flex">
+            <div className="md:flex">
                 {/* Mortgage Form */}
-                <form className="w-1/2">
-                    <div className="p-12">
-                        <div className="flex items-center justify-between mb-8">
-                            <h1 className="font-bold text-2xl text-slate-900">Mortgage Calculator</h1>
+                <form className="md:w-1/2">
+                    <div className="p-6 md:p-12">
+                        <div className="md:flex md:items-center md:justify-between mb-8">
+                            <h1 className="font-bold text-2xl text-slate-900 mb-3 md:mb-0">Mortgage Calculator</h1>
                             <button 
                                 type="reset" 
                                 className="text-slate-500 underline underline-offset-3 cursor-pointer
@@ -35,7 +35,7 @@ export default function MortgageCalculator() {
                         </div>
 
                         {/* Term and Interest fields */}
-                        <div className="grid grid-cols-2 gap-6 mb-6">
+                        <div className="grid md:grid-cols-2 gap-6 mb-6">
                             <div>
                                 <MortgageInputField  
                                     label="Mortgage Term"
@@ -87,7 +87,7 @@ export default function MortgageCalculator() {
                 </form>
 
 
-                <div className="w-1/2 bg-slate-700 p-12 rounded-tr-3xl rounded-br-3xl rounded-bl-[100px]">
+                <div className="md:w-1/2 p-6 md:p-12 bg-slate-700 md:rounded-tr-3xl md:rounded-br-3xl md:rounded-bl-[100px]">
                     <div className="flex items-center justify-center max-h-full h-full">
                         <EmptyState  />
                     </div>
