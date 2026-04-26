@@ -12,14 +12,15 @@ export default function MortgageTypeOption({name, id, optionType}: MortgageTypeO
     };
     
     return (
-        <div>
+        <div className="flex items-center gap-2 border border-slate-500 p-3 rounded-md">
             <input 
                 type="radio" 
                 name={name} 
                 id={id} 
                 value={optionType}
+                className="w-5 h-5"
             />
-            <label htmlFor={id}>
+            <label htmlFor={id} className="font-bold text-slate-700">
                 {labelMap[optionType]}
             </label>
         </div>

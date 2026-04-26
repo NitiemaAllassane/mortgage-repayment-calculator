@@ -9,64 +9,83 @@ import ActionButton from "./ActionButton"
 export default function MortgageCalculator() {
     
     return (
-        <article>
-            <div>
+        <article className="w-5xl bg-white rounded-3xl shadow-2xs">
+            <div className="flex">
                 {/* Mortgage Form */}
-                <form action="">
-                    <div>
-                        <h1>Mortgage Calculator</h1>
-                        <button type="reset">Clear All</button>
-                    </div>
+                <form className="w-1/2">
+                    <div className="p-8">
+                        <div className="flex items-center justify-between mb-8">
+                            <h1 className="font-bold text-2xl text-slate-900">Mortgage Calculator</h1>
+                            <button 
+                                type="reset" 
+                                className="text-slate-500 underline underline-offset-3 cursor-pointer">
+                                Clear All
+                            </button>
+                        </div>
 
-                    <div>
-                        <MortgageInputField  
-                            label="Mortgage Amount"
-                            fieldType="amount"
-                            suffixPosition="left"
-                        />
-                    </div>
-
-                    <div>
-                        <div>
+                        {/* Amount field */}
+                        <div className="mb-6">
                             <MortgageInputField  
-                                label="Mortgage Term"
-                                fieldType="term"
-                                suffixPosition="right"
+                                label="Mortgage Amount"
+                                fieldType="amount"
+                                suffixPosition="left"
                             />
                         </div>
+
+                        {/* Term and Interest fields */}
+                        <div className="grid grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <MortgageInputField  
+                                    label="Mortgage Term"
+                                    fieldType="term"
+                                    suffixPosition="right"
+                                />
+                            </div>
+                            <div>
+                                <MortgageInputField  
+                                    label="Interest Rate"
+                                    fieldType="interest"
+                                    suffixPosition="right"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Type options */}
+                        <div className="mb-8">
+                            <label 
+                                htmlFor="mortageType"
+                                className="text-slate-500 font-medium inline-block mb-3"
+                            >
+                                Mortgage Type
+                            </label>
+                            <ul className="flex flex-col gap-2">
+                                <li>
+                                    <MortgageTypeOption  
+                                        optionType="repayment"
+                                        name="mortageType"
+                                        id="repayment"
+                                    />
+                                </li>
+                                <li>
+                                    <MortgageTypeOption  
+                                        optionType="interestOnly"
+                                        name="mortageType"
+                                        id="interestOnly"
+                                    />
+                                </li>
+                            </ul>
+                        </div>
+
                         <div>
-                            <MortgageInputField  
-                                label="Interest Rate"
-                                fieldType="interest"
-                                suffixPosition="right"
+                            <ActionButton  
+                                text="Calculate Repayments"
                             />
                         </div>
-                    </div>
-
-                    <div>
-                        <label htmlFor="mortageType">Mortgage Type</label>
-                        <MortgageTypeOption  
-                            optionType="repayment"
-                            name="mortageType"
-                            id="repayment"
-                        />
-
-                        <MortgageTypeOption  
-                            optionType="interestOnly"
-                            name="mortageType"
-                            id="interest"
-                        />
-                    </div>
-
-                    <div>
-                        <ActionButton  
-                            text="Calculate Repayments"
-                        />
                     </div>
                 </form>
 
 
-                <div>
+                <div className="w-1/2">
                     <div>
                         <EmptyState  />
                     </div>

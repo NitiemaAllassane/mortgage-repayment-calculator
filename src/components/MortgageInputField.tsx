@@ -1,3 +1,4 @@
+import clsx from "clsx";
 interface MortgageInputFieldProps {
     label: string;
     fieldType: "amount" | "term" | "interest";
@@ -20,12 +21,25 @@ export default function MortgageInputField({
     
     return (
         <>
-            <label htmlFor={fieldType}>{label}</label>
-            <div>
-                <div>
+            <label 
+                htmlFor={fieldType}
+                className="text-slate-500 font-medium inline-block mb-3"
+            >
+                {label}
+            </label>
+            <div className={clsx(
+                "flex border border-slate-500 rounded-md overflow-hidden",
+                suffixPosition === "right" && "flex-row-reverse"
+            )}>
+                <div className="bg-slate-100 text-slate-500 font-bold flex items-center justify-center px-4">
                     {suffixMap[fieldType]}
                 </div>
-                <input type="number" name={fieldType} id={fieldType} />
+                <input 
+                    type="number" 
+                    name={fieldType} 
+                    id={fieldType} 
+                    className="py-3 pl-4 w-full outline-none font-bold text-slate-700"
+                />
             </div>
         </>
     )
