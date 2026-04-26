@@ -13,7 +13,7 @@ export default function MortgageCalculator() {
             <div className="flex">
                 {/* Mortgage Form */}
                 <form className="w-1/2">
-                    <div className="p-8">
+                    <div className="p-12">
                         <div className="flex items-center justify-between mb-8">
                             <h1 className="font-bold text-2xl text-slate-900">Mortgage Calculator</h1>
                             <button 
@@ -85,8 +85,8 @@ export default function MortgageCalculator() {
                 </form>
 
 
-                <div className="w-1/2">
-                    <div>
+                <div className="w-1/2 bg-slate-700 p-12 rounded-tr-3xl rounded-br-3xl rounded-bl-[100px]">
+                    <div className="flex items-center justify-center max-h-full h-full">
                         <EmptyState  />
                     </div>
                 </div>
