@@ -28,7 +28,7 @@ export default function MortgageInputField({
                 {label}
             </label>
             <div className={clsx(
-                "flex border border-slate-500 rounded-md overflow-hidden",
+                "flex border border-slate-500 rounded-md overflow-hidden hover:outline-1 hover:outline-slate-700",
                 suffixPosition === "right" && "flex-row-reverse"
             )}>
                 <div className="bg-slate-100 text-slate-500 font-bold flex items-center justify-center px-4">

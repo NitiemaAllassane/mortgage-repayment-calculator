@@ -18,7 +18,9 @@ export default function MortgageCalculator() {
                             <h1 className="font-bold text-2xl text-slate-900">Mortgage Calculator</h1>
                             <button 
                                 type="reset" 
-                                className="text-slate-500 underline underline-offset-3 cursor-pointer">
+                                className="text-slate-500 underline underline-offset-3 cursor-pointer
+                                hover:text-slate-700"
+                            >
                                 Clear All
                             </button>
                         </div>

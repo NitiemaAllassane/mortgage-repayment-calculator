@@ -4,7 +4,8 @@ export default function ActionButton({ text }: { text: string }) {
     return (
         <button 
             type="submit"
-            className="bg-lime flex items-center justify-center gap-3 p-3 px-6 rounded-4xl cursor-pointer"
+            className="bg-lime flex items-center justify-center gap-3 p-3 px-6 rounded-4xl cursor-pointer
+            hover:bg-lime/55"
         >
             <span>
                 <img src={calculatorIcon} alt="Calculator Icon" />
