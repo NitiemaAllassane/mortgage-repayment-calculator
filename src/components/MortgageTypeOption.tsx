@@ -14,7 +14,8 @@ export default function MortgageTypeOption({name, id, optionType}: MortgageTypeO
     return (
         <div 
             className="flex items-center gap-2 border border-slate-500 p-3 rounded-md
-            hover:border-lime cursor-pointer"
+            hover:border-lime cursor-pointer has-checked:border-0 has-checked:outline-2 has-checked:outline-lime
+    has-checked:bg-lime/30"
         >
             <input 
                 type="radio" 
