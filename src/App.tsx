@@ -1,3 +1,4 @@
+import MortgageCalculator from './components/MortageCalculator'
 import './App.css'
 
 function App() {
@@ -5,7 +6,7 @@ function App() {
   return (
     <>
       <main>
-        <h1>Hello friends !</h1>
+        <MortgageCalculator  />
       </main>
     </>
   )
