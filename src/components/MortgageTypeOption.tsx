@@ -1,10 +1,21 @@
+import type { mortgageType } from "../types/types";
+
 interface MortgageTypeOptionProps {
     name: string;
     id: string;
-    optionType: "repayment" | "interestOnly";
+    checked: boolean;
+    onOptionChange: (value: string) => void;
+    optionType: mortgageType;
 }
 
-export default function MortgageTypeOption({name, id, optionType}: MortgageTypeOptionProps) {
+export default function MortgageTypeOption({
+    name, 
+    id, 
+    checked,
+    onOptionChange,
+    optionType
+}: MortgageTypeOptionProps
+) {
 
     const labelMap = {
         repayment: "Repayment",
@@ -21,7 +32,9 @@ export default function MortgageTypeOption({name, id, optionType}: MortgageTypeO
                 type="radio" 
                 name={name} 
                 id={id} 
+                checked={checked}
                 value={optionType}
+                onChange={() => onOptionChange(optionType)}
                 className="w-5 h-5"
             />
             <label htmlFor={id} className="font-bold text-slate-700 cursor-pointer">

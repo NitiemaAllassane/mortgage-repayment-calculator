@@ -5,7 +5,7 @@ interface MortgageInputFieldProps {
     suffixPosition?: "left" | "right";
     value: string;
     error: string;
-    onValueChange: React.Dispatch<React.SetStateAction<string>>;
+    onValueChange: (value: string) => void;
 }
 
 

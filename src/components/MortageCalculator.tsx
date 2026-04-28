@@ -15,15 +15,111 @@ export default function MortgageCalculator() {
     const [ interestValue, setInterestValue ] = useState('');
     const [ mortageTypeValue, setMortageTypeValue ] = useState('');
     const [ error, setError ] = useState<Error>({
-        amount: "This field is required",
-        term: "This field is required",
-        interest: "This field is required",
-        mortgageType: "This field is required"
+        amount: "",
+        term: "",
+        interest: "",
+        mortgageType: ""
     });
 
 
-    function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+
+
+    // * Handle changes
+
+    function handleAmountChange(value: string) {
+        setAmountValue(value);
+        setError((prev) => ({
+            ...prev,
+            amount: ""
+        }))
+    }
+
+    
+    function handleTermChange(value: string) {
+        setTermValue(value);
+        setError((prev) => ({
+            ...prev,
+            term: ""
+        }))
+    }
+
+    function handleInterestChange(value: string) {
+        setInterestValue(value);
+        setError((prev) => ({
+            ...prev,
+            interest: ""
+        }))
+    }
+
+    function handleMortgageTypeChange(value: string) {
+        setMortageTypeValue(value);
+        setError(prev => ({
+            ...prev,
+            mortgageType: ""
+        }));
+    }
+
+
+
+    function validateFormData(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
+        
+        const newError = {
+            amount: "",
+            term: "",
+            interest: "",
+            mortgageType: ""
+        }
+
+        const amount = Number(amountValue);
+        const term = Number(termValue);
+        const interest = Number(interestValue);
+
+        // Amount
+        if (!amountValue) {
+            newError.amount = "This field is required";
+        } else if (isNaN(amount) || amount <= 0) {
+            newError.amount = "Enter a valid amount";
+        }
+
+        // Term
+        if (!termValue) {
+            newError.term = "This field is required";
+        } else if (isNaN(term) || term <= 0) {
+            newError.term = "Enter a valid term";
+        } else if (term > 50) {
+            newError.term = "Term is too long";
+        }
+
+        // Interest
+        if (!interestValue) {
+            newError.interest = "This field is required";
+        } else if (isNaN(interest) || interest <= 0) {
+            newError.interest = "Enter a valid interest rate";
+        } else if (interest > 100) {
+            newError.interest = "Interest rate is too high";
+        }
+
+        // Type
+        if (!mortageTypeValue) {
+            newError.mortgageType = "Please select a mortgage type";
+        }
+
+        setError(newError);
+    }
+
+
+    // Function to reset All
+    function resetForm() {
+        setAmountValue('');
+        setTermValue('');
+        setInterestValue('');
+        setError({
+            amount: "",
+            term: "",
+            interest: "",
+            mortgageType: ""
+        })
     }
 
 
@@ -31,7 +127,7 @@ export default function MortgageCalculator() {
         <article className="w-5xl bg-white rounded-3xl shadow-2xs">
             <div className="md:flex">
                 {/* Mortgage Form */}
-                <form className="md:w-1/2" onSubmit={(e) => handleSubmit(e)}>
+                <form className="md:w-1/2" onSubmit={(e) => validateFormData(e)}>
                     <div className="p-6 md:p-12">
                         <div className="md:flex md:items-center md:justify-between mb-8">
                             <h1 className="font-bold text-2xl text-slate-900 mb-3 md:mb-0">Mortgage Calculator</h1>
@@ -39,6 +135,7 @@ export default function MortgageCalculator() {
                                 type="reset" 
                                 className="text-slate-500 underline underline-offset-3 cursor-pointer
                                 hover:text-slate-700"
+                                onClick={resetForm}
                             >
                                 Clear All
                             </button>
@@ -51,7 +148,7 @@ export default function MortgageCalculator() {
                                 fieldType="amount"
                                 suffixPosition="left"
                                 value={amountValue}
-                                onValueChange={setAmountValue}
+                                onValueChange={handleAmountChange}
                                 error={error.amount}
                             />
                         </div>
@@ -64,7 +161,7 @@ export default function MortgageCalculator() {
                                     fieldType="term"
                                     suffixPosition="right"
                                     value={termValue}
-                                    onValueChange={setTermValue}
+                                    onValueChange={handleTermChange}
                                     error={error.term}
                                 />
                             </div>
@@ -74,7 +171,7 @@ export default function MortgageCalculator() {
                                     fieldType="interest"
                                     suffixPosition="right"
                                     value={interestValue}
-                                    onValueChange={setInterestValue}
+                                    onValueChange={handleInterestChange}
                                     error={error.interest}
                                 />
                             </div>
@@ -94,6 +191,8 @@ export default function MortgageCalculator() {
                                         optionType="repayment"
                                         name="mortageType"
                                         id="repayment"
+                                        checked={mortageTypeValue === "repayment"}
+                                        onOptionChange={handleMortgageTypeChange}
                                     />
                                 </li>
                                 <li>
@@ -101,6 +200,8 @@ export default function MortgageCalculator() {
                                         optionType="interestOnly"
                                         name="mortageType"
                                         id="interestOnly"
+                                        checked={mortageTypeValue === "interestOnly"}
+                                        onOptionChange={handleMortgageTypeChange}
                                     />
                                 </li>
                                 <p className="text-sm font-normal text-red mt-2">{error.mortgageType}</p>

@@ -3,6 +3,8 @@ export interface Results {
     totalPayment: number;
 }
 
+export type mortgageType = "repayment" | "interestOnly";
+
 export interface Error {
     amount: string;
     term: string;
