@@ -1,19 +1,37 @@
+import { useState } from "react"
 import MortgageInputField from "./MortgageInputField"
 import MortgageTypeOption from "./MortgageTypeOption"
-// import EmptyState from "./EmptyState"
-import ResultDisplayer from "./ResultDisplayer"
+import EmptyState from "./EmptyState"
+// import ResultDisplayer from "./ResultDisplayer"
 import ActionButton from "./ActionButton"
+import type { Error } from "../types/types"
 
 
 
 
 export default function MortgageCalculator() {
-    
+    const [ amountValue, setAmountValue ] = useState('');
+    const [ termValue, setTermValue ] = useState('');
+    const [ interestValue, setInterestValue ] = useState('');
+    const [ mortageTypeValue, setMortageTypeValue ] = useState('');
+    const [ error, setError ] = useState<Error>({
+        amount: "This field is required",
+        term: "This field is required",
+        interest: "This field is required",
+        mortgageType: "This field is required"
+    });
+
+
+    function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+        e.preventDefault();
+    }
+
+
     return (
         <article className="w-5xl bg-white rounded-3xl shadow-2xs">
             <div className="md:flex">
                 {/* Mortgage Form */}
-                <form className="md:w-1/2">
+                <form className="md:w-1/2" onSubmit={(e) => handleSubmit(e)}>
                     <div className="p-6 md:p-12">
                         <div className="md:flex md:items-center md:justify-between mb-8">
                             <h1 className="font-bold text-2xl text-slate-900 mb-3 md:mb-0">Mortgage Calculator</h1>
@@ -32,6 +50,9 @@ export default function MortgageCalculator() {
                                 label="Mortgage Amount"
                                 fieldType="amount"
                                 suffixPosition="left"
+                                value={amountValue}
+                                onValueChange={setAmountValue}
+                                error={error.amount}
                             />
                         </div>
 
@@ -42,6 +63,9 @@ export default function MortgageCalculator() {
                                     label="Mortgage Term"
                                     fieldType="term"
                                     suffixPosition="right"
+                                    value={termValue}
+                                    onValueChange={setTermValue}
+                                    error={error.term}
                                 />
                             </div>
                             <div>
@@ -49,6 +73,9 @@ export default function MortgageCalculator() {
                                     label="Interest Rate"
                                     fieldType="interest"
                                     suffixPosition="right"
+                                    value={interestValue}
+                                    onValueChange={setInterestValue}
+                                    error={error.interest}
                                 />
                             </div>
                         </div>
@@ -76,6 +103,7 @@ export default function MortgageCalculator() {
                                         id="interestOnly"
                                     />
                                 </li>
+                                <p className="text-sm font-normal text-red mt-2">{error.mortgageType}</p>
                             </ul>
                         </div>
 
@@ -89,13 +117,13 @@ export default function MortgageCalculator() {
 
 
                 <div className="md:w-1/2 p-6 md:p-12 bg-slate-700 md:rounded-tr-3xl md:rounded-br-3xl md:rounded-bl-[100px]">
-                    {/* <div className="flex items-center justify-center max-h-full h-full">
+                    <div className="flex items-center justify-center max-h-full h-full">
                         <EmptyState  />
-                    </div> */}
-                    <ResultDisplayer 
+                    </div>
+                    {/* <ResultDisplayer 
                         monthlyPayment={1797.74} 
                         totalPayment={539322.94}
-                    />
+                    /> */}
                 </div>
             </div>
         </article>

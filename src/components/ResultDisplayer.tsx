@@ -1,7 +1,4 @@
-interface Results {
-    monthlyPayment: number; 
-    totalPayment: number;
-}
+import type { Results } from "../types/types"
 
 export default function ResultDisplayer({ monthlyPayment, totalPayment }: Results) {
     
