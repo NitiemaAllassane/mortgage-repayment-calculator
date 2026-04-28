@@ -1,6 +1,7 @@
 import MortgageInputField from "./MortgageInputField"
 import MortgageTypeOption from "./MortgageTypeOption"
-import EmptyState from "./EmptyState"
+// import EmptyState from "./EmptyState"
+import ResultDisplayer from "./ResultDisplayer"
 import ActionButton from "./ActionButton"
 
 
@@ -88,9 +89,13 @@ export default function MortgageCalculator() {
 
 
                 <div className="md:w-1/2 p-6 md:p-12 bg-slate-700 md:rounded-tr-3xl md:rounded-br-3xl md:rounded-bl-[100px]">
-                    <div className="flex items-center justify-center max-h-full h-full">
+                    {/* <div className="flex items-center justify-center max-h-full h-full">
                         <EmptyState  />
-                    </div>
+                    </div> */}
+                    <ResultDisplayer 
+                        monthlyPayment={1797.74} 
+                        totalPayment={539322.94}
+                    />
                 </div>
             </div>
         </article>
