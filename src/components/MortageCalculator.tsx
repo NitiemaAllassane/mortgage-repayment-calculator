@@ -2,9 +2,10 @@ import { useState } from "react"
 import MortgageInputField from "./MortgageInputField"
 import MortgageTypeOption from "./MortgageTypeOption"
 import EmptyState from "./EmptyState"
-// import ResultDisplayer from "./ResultDisplayer"
+import ResultDisplayer from "./ResultDisplayer"
 import ActionButton from "./ActionButton"
-import type { Error } from "../types/types"
+import type { Error, Results } from "../types/types"
+import { calulateRepayment } from "../utils/utils"
 
 
 
@@ -20,6 +21,7 @@ export default function MortgageCalculator() {
         interest: "",
         mortgageType: ""
     });
+    const [ repaymentResult, setRepaymentResult ] = useState<null | Results>(null);
 
 
 
@@ -60,6 +62,23 @@ export default function MortgageCalculator() {
     }
 
 
+     // Function to reset All
+    function resetForm() {
+        setAmountValue('');
+        setTermValue('');
+        setInterestValue('');
+        setError({
+            amount: "",
+            term: "",
+            interest: "",
+            mortgageType: ""
+        })
+        setRepaymentResult(null)
+    }
+
+    
+
+    // * Handle data on submit
 
     function validateFormData(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -71,32 +90,32 @@ export default function MortgageCalculator() {
             mortgageType: ""
         }
 
-        const amount = Number(amountValue);
-        const term = Number(termValue);
-        const interest = Number(interestValue);
+        const amountVal = Number(amountValue);
+        const termVal = Number(termValue);
+        const interestVal = Number(interestValue);
 
         // Amount
         if (!amountValue) {
             newError.amount = "This field is required";
-        } else if (isNaN(amount) || amount <= 0) {
+        } else if (isNaN(amountVal) || amountVal <= 0) {
             newError.amount = "Enter a valid amount";
         }
 
         // Term
         if (!termValue) {
             newError.term = "This field is required";
-        } else if (isNaN(term) || term <= 0) {
+        } else if (isNaN(termVal) || termVal <= 0) {
             newError.term = "Enter a valid term";
-        } else if (term > 50) {
+        } else if (termVal > 100) {
             newError.term = "Term is too long";
         }
 
         // Interest
         if (!interestValue) {
             newError.interest = "This field is required";
-        } else if (isNaN(interest) || interest <= 0) {
+        } else if (isNaN(interestVal) || interestVal <= 0) {
             newError.interest = "Enter a valid interest rate";
-        } else if (interest > 100) {
+        } else if (interestVal > 100) {
             newError.interest = "Interest rate is too high";
         }
 
@@ -106,20 +125,36 @@ export default function MortgageCalculator() {
         }
 
         setError(newError);
-    }
 
+        if (
+            !newError.amount &&
+            !newError.term &&
+            !newError.interest &&
+            !newError.mortgageType
+        ) {
 
-    // Function to reset All
-    function resetForm() {
-        setAmountValue('');
-        setTermValue('');
-        setInterestValue('');
-        setError({
-            amount: "",
-            term: "",
-            interest: "",
-            mortgageType: ""
-        })
+            const amount = Number(amountValue);
+            const term = Number(termValue) * 12;
+            const interest = Number(interestValue) / 100 / 12;
+           
+            if (mortageTypeValue === "repayment") {
+                const monthly = calulateRepayment(amount, interest, term);
+                const total = monthly * term;
+
+                setRepaymentResult({
+                    monthlyPayment: monthly,
+                    totalPayment: total
+                });
+            } else {
+                const monthly = amount * interest;
+                const total = monthly * term;
+
+                setRepaymentResult({
+                    monthlyPayment: monthly,
+                    totalPayment: total
+                });
+            }
+        }
     }
 
 
@@ -142,7 +177,7 @@ export default function MortgageCalculator() {
                         </div>
 
                         {/* Amount field */}
-                        <div className="mb-6">
+                        <div className="mb-4">
                             <MortgageInputField  
                                 label="Mortgage Amount"
                                 fieldType="amount"
@@ -154,7 +189,7 @@ export default function MortgageCalculator() {
                         </div>
 
                         {/* Term and Interest fields */}
-                        <div className="grid md:grid-cols-2 gap-6 mb-6">
+                        <div className="grid md:grid-cols-2 gap-6 mb-4">
                             <div>
                                 <MortgageInputField  
                                     label="Mortgage Term"
@@ -204,7 +239,7 @@ export default function MortgageCalculator() {
                                         onOptionChange={handleMortgageTypeChange}
                                     />
                                 </li>
-                                <p className="text-sm font-normal text-red mt-2">{error.mortgageType}</p>
+                                <p className="text-sm font-normal text-red mt-1">{error.mortgageType}</p>
                             </ul>
                         </div>
 
@@ -218,13 +253,16 @@ export default function MortgageCalculator() {
 
 
                 <div className="md:w-1/2 p-6 md:p-12 bg-slate-700 md:rounded-tr-3xl md:rounded-br-3xl md:rounded-bl-[100px]">
-                    <div className="flex items-center justify-center max-h-full h-full">
-                        <EmptyState  />
-                    </div>
-                    {/* <ResultDisplayer 
-                        monthlyPayment={1797.74} 
-                        totalPayment={539322.94}
-                    /> */}
+                    {!repaymentResult ? (
+                        <div className="flex items-center justify-center max-h-full h-full">
+                            <EmptyState  />
+                        </div>
+                    ) : (
+                        <ResultDisplayer 
+                            monthlyPayment={repaymentResult.monthlyPayment} 
+                            totalPayment={repaymentResult.totalPayment}
+                        />
+                    )}
                 </div>
             </div>
         </article>

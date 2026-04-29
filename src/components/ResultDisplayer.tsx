@@ -16,15 +16,23 @@ export default function ResultDisplayer({ monthlyPayment, totalPayment }: Result
                 <div className="py-8 border-b border-slate-500">
                     <h3 className="text-slate-300 mb-3">Your monthly repayments</h3>
                     <p className="text-6xl font-bold text-lime">
-                        <span>£</span>
-                        <span>{monthlyPayment}</span>
+                        <span>
+                            {monthlyPayment.toLocaleString("en-GB", {
+                                style: "currency",
+                                currency: "GBP"
+                            })}
+                        </span>
                     </p>
                 </div>
                 <div className="py-8">
                     <h3 className="text-slate-300 mb-3">Total you'll repay over the term</h3>
                     <p className="text-xl text-white font-bold">
-                        <span>£</span>
-                        <span>{totalPayment}</span>
+                        <span>
+                            {totalPayment.toLocaleString("en-GB", {
+                                style: "currency",
+                                currency: "GBP"
+                            })}
+                        </span>
                     </p>
                 </div>
             </div>
