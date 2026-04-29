@@ -4,20 +4,21 @@ This is a solution to the [Mortgage repayment calculator challenge on Frontend M
 
 ## Table of contents
 
-- [Overview](#overview)
-  - [The challenge](#the-challenge)
+- [Frontend Mentor - Mortgage repayment calculator solution](#frontend-mentor---mortgage-repayment-calculator-solution)
+  - [Table of contents](#table-of-contents)
+  - [Overview](#overview)
+    - [The challenge](#the-challenge)
   - [Screenshot](#screenshot)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
+    - [Links](#links)
+  - [My process](#my-process)
+    - [Built with](#built-with)
+    - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
   - [AI Collaboration](#ai-collaboration)
-- [Author](#author)
-- [Acknowledgments](#acknowledgments)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
+    - [What worked well:](#what-worked-well)
+    - [What didn’t:](#what-didnt)
+  - [Author](#author)
 
 ## Overview
 
@@ -26,100 +27,111 @@ This is a solution to the [Mortgage repayment calculator challenge on Frontend M
 Users should be able to:
 
 - Input mortgage information and see monthly repayment and total repayment amounts after submitting the form
-- See form validation messages if any field is incomplete
-- Complete the form only using their keyboard
-- View the optimal layout for the interface depending on their device's screen size
-- See hover and focus states for all interactive elements on the page
+- See form validation messages if any field is incomplete or invalid
+- Select a mortgage type (repayment or interest-only)
+- Complete the form using keyboard navigation
+- View responsive layouts depending on screen size
+- See hover and focus states for interactive elements
 
-### Screenshot
 
-![](./screenshot.jpg)
+## Screenshot
 
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![](./public/screenshots/FireShot%20Capture%20041%20-%20Mortgage%20Repayment%20Calculator_%20-%20[mortgage-repayment-calculator-nu-two.vercel.app].png)
+![](./public/screenshots/FireShot%20Capture%20042%20-%20Mortgage%20Repayment%20Calculator_%20-%20[mortgage-repayment-calculator-nu-two.vercel.app].png)
+![](./public/screenshots/FireShot%20Capture%20043%20-%20Mortgage%20Repayment%20Calculator_%20-%20[mortgage-repayment-calculator-nu-two.vercel.app].png)
+![](./public/screenshots/FireShot%20Capture%20044%20-%20Mortgage%20Repayment%20Calculator_%20-%20[mortgage-repayment-calculator-nu-two.vercel.app].png)
+![](./public/screenshots/FireShot%20Capture%20045%20-%20Mortgage%20Repayment%20Calculator_%20-%20[mortgage-repayment-calculator-nu-two.vercel.app].png)
+![](./public/screenshots/FireShot%20Capture%20046%20-%20Mortgage%20Repayment%20Calculator_%20-%20[mortgage-repayment-calculator-nu-two.vercel.app].png)
 
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [[Add live site URL here](https://mortgage-repayment-calculator-nu-two.vercel.app/)](https://mortgage-repayment-calculator-nu-two.vercel.app/)
 
 ## My process
 
 ### Built with
 
-- Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- CSS Grid
+- Semantic HTML5
+- Tailwind CSS
+- Flexbox & CSS Grid
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- React
+- TypeScript
+- clsx (for conditional styling)
 
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+---
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+This project helped me better understand how to structure a React application with controlled form inputs and validation logic.
 
-To see how you can add code snippets, see below:
+One key takeaway was separating **data (numbers)** from **presentation (formatted strings)** when displaying currency values.
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
+```ts
+function formatCurrency(value: number) {
+  return value.toLocaleString("en-GB", {
+    style: "currency",
+    currency: "GBP"
+  });
 }
+
+const [error, setError] = useState({
+  amount: "",
+  term: "",
+  interest: "",
+  mortgageType: ""
+});
+
 ```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+Another important concept was managing controlled inputs and keeping the UI in sync with state.
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+---
 
-### Continued development
+## Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+In future projects, I want to:
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+- Improve input formatting (e.g. formatted numbers with preserved cursor position)
+- Refactor validation logic into reusable hooks (e.g. `useForm`)
+- Handle more mortgage types (like interest-only calculations)
+- Improve accessibility (ARIA, screen readers)
+- Add unit tests for calculation logic
 
-### Useful resources
+---
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+## Useful resources
 
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString  
+  Helped me understand currency formatting
 
-### AI Collaboration
+- https://react.dev/learn  
+   Great reference for controlled components and state management
 
-Describe how you used AI tools (if any) during this project. This helps demonstrate your ability to work effectively with AI assistants.
+---
 
-- What tools did you use (e.g., ChatGPT, Claude, GitHub Copilot)?
-- How did you use them (e.g., debugging, generating boilerplate, brainstorming solutions)?
-- What worked well? What didn't?
+## AI Collaboration
 
-**Note: Delete this note and the content above if you didn't use AI, or replace with your own experience.**
+I used ChatGPT as a learning assistant during this project.
+
+- Helped me understand mortgage calculation formulas
+- Assisted with debugging React state and controlled inputs
+- Guided me on best practices (state vs display formatting)
+- Helped improve component naming and structure
+
+### What worked well:
+
+- Breaking down complex concepts step-by-step
+- Getting explanations instead of full solutions
+
+### What didn’t:
+
+- Some solutions required adjustments to fit my architecture
+
+---
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+- Frontend Mentor - [@NitiemaAllassane](https://www.frontendmentor.io/profile/NitiemaAllassane)
+- Blog - [@NitiemaAllassane](https://nitiema-allassane.vercel.app/)

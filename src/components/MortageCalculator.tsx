@@ -250,7 +250,7 @@ export default function MortgageCalculator() {
                     </div>
                 </form>
 
-
+                {/* Results */}
                 <div className="md:w-1/2 p-6 md:p-12 bg-slate-700 md:rounded-tr-3xl md:rounded-br-3xl md:rounded-bl-[100px]">
                     {!repaymentResult ? (
                         <div className="flex items-center justify-center max-h-full h-full">
