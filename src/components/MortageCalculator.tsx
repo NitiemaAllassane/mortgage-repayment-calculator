@@ -214,12 +214,11 @@ export default function MortgageCalculator() {
 
                         {/* Type options */}
                         <div className="mb-8">
-                            <label 
-                                htmlFor="mortageType"
+                            <p 
                                 className="text-slate-500 font-medium inline-block mb-3"
                             >
                                 Mortgage Type
-                            </label>
+                            </p>
                             <ul className="flex flex-col gap-2">
                                 <li>
                                     <MortgageTypeOption  

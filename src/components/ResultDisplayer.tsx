@@ -15,8 +15,8 @@ export default function ResultDisplayer({ monthlyPayment, totalPayment }: Result
             <div className="bg-slate-900 border-t-4 border-t-lime rounded-md px-8">
                 <div className="py-8 border-b border-slate-500">
                     <h3 className="text-slate-300 mb-3">Your monthly repayments</h3>
-                    <p className="text-6xl font-bold text-lime">
-                        <span>
+                    <p className="text-4xl md:text-6xl font-bold text-lime">
+                        <span className="wrap-break-word">
                             {monthlyPayment.toLocaleString("en-GB", {
                                 style: "currency",
                                 currency: "GBP"
